@@ -9,10 +9,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.logging.Logger;
 
-// Maybe you should write SERVICES.
-// TODO: Write services 16:56
-// https://www.youtube.com/watch?v=e7swABdqOS4
-
 @Repository
 public class AirCompanyDaoImpl implements AirCompanyDao {
     private static final Logger LOGGER = (Logger) LoggerFactory.getLogger(AirCompanyDaoImpl.class);
