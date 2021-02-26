@@ -6,7 +6,7 @@
   ---
 2. Create mysql database 
   
-  mysql database airplanes
+  create database AIR
   ---
 3. Go to project core and run app 
   
