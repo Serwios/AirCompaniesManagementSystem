@@ -1,6 +1,8 @@
 package Sevices;
 
 import Entities.AirCompany;
+import Entities.Airplane;
+
 import java.util.List;
 
 public interface AirCompanyService {
@@ -9,4 +11,5 @@ public interface AirCompanyService {
     public void removeAirCompany(Long id);
     public AirCompany getAirCompanyById(Long id);
     public List<AirCompany> listAirCompanies();
+    public Airplane moveAirPlaneBetweenCompanies(Airplane airplane, AirCompany airCompany);
 }

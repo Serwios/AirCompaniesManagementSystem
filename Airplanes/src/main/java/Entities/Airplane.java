@@ -13,8 +13,8 @@ public class Airplane {
     private Long ID;
     private Long id;
     private Long flightDistance;
+    private Long airCompanyId;
     private Integer serialNumber;
-    private Integer airCompanyId;
     private Integer numberOfFlights;
     private Integer fuelCapacity;
     private String name;
@@ -23,7 +23,7 @@ public class Airplane {
 
     protected Airplane() {}
 
-    public Airplane(Long id, Long flightDistance, Integer serialNumber, Integer airCompanyId,
+    public Airplane(Long id, Long flightDistance, Integer serialNumber, Long airCompanyId,
                     Integer numberOfFlights, Integer fuelCapacity, String name, String factory, String type) {
         this.id = id;
         this.flightDistance = flightDistance;
@@ -64,11 +64,11 @@ public class Airplane {
         this.serialNumber = serialNumber;
     }
 
-    public Integer getAirCompanyId() {
+    public Long getAirCompanyId() {
         return airCompanyId;
     }
 
-    public void setAirCompanyId(Integer airCompanyId) {
+    public void setAirCompanyId(Long airCompanyId) {
         this.airCompanyId = airCompanyId;
     }
 
