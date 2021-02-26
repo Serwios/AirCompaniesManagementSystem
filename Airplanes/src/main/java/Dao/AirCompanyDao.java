@@ -4,9 +4,9 @@ import Entities.AirCompany;
 import java.util.List;
 
 public interface AirCompanyDao {
-    public void addAirCompany(AirCompany airCompany);
-    public void updateAirCompany(AirCompany airCompany);
-    public void removeAirCompany(Long id);
-    public AirCompany getAirCompanyById(Long id);
-    public List<AirCompany> listAirCompanies();
+    AirCompany addAirCompany(AirCompany airCompany);
+    void updateAirCompany(AirCompany airCompany);
+    void removeAirCompany(Long id);
+    AirCompany getAirCompanyById(Long id);
+    List<AirCompany> listAirCompanies();
 }

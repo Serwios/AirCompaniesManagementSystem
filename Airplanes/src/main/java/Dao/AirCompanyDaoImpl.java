@@ -20,10 +20,11 @@ public class AirCompanyDaoImpl implements AirCompanyDao {
     }
 
     @Override
-    public void addAirCompany(AirCompany airCompany) {
+    public AirCompany addAirCompany(AirCompany airCompany) {
         Session session = this.sessionFactory.getCurrentSession();
         session.persist(airCompany);
         LOGGER.info("AirCompany successful added! AirCompany details: " + airCompany);
+        return airCompany;
     }
 
     @Override

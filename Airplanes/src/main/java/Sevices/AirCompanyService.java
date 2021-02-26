@@ -6,7 +6,7 @@ import Entities.Airplane;
 import java.util.List;
 
 public interface AirCompanyService {
-    public void addAirCompany(AirCompany airCompany);
+    public AirCompany addAirCompany(AirCompany airCompany);
     public void updateAirCompany(AirCompany airCompany);
     public void removeAirCompany(Long id);
     public AirCompany getAirCompanyById(Long id);

@@ -18,8 +18,8 @@ public class AirCompanyServiceImpl implements AirCompanyService {
 
     @Override
     @Transactional
-    public void addAirCompany(AirCompany airCompany) {
-        this.airCompanyDao.addAirCompany(airCompany);
+    public AirCompany addAirCompany(AirCompany airCompany) {
+        return this.airCompanyDao.addAirCompany(airCompany);
     }
 
     @Override
