@@ -1,11 +1,13 @@
 package Dao;
 
 import Entities.AirCompany;
+import Entities.Flight;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -66,5 +68,20 @@ public class AirCompanyDaoImpl implements AirCompanyDao {
         }
 
         return airCompaniesList;
+    }
+
+    @Override
+    public List<Flight> findAllAirCompanyFlightByStatus(String status) {
+        Session session = this.sessionFactory.getCurrentSession();
+        List<Flight> sndFlightLs = session.createQuery("from Flight").list();
+        List<Flight> modFlightLs = new ArrayList<>();
+
+        for (Flight x: sndFlightLs) {
+            if (x.getFlightStatus().equals(status)) {
+                modFlightLs.add(x);
+            }
+        }
+
+        return modFlightLs;
     }
 }

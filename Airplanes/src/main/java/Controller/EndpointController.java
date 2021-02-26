@@ -6,18 +6,21 @@ import java.util.logging.Logger;
 
 import Entities.AirCompany;
 import Entities.Airplane;
+import Entities.Flight;
 import Sevices.AirCompanyService;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import javax.validation.Valid;
 
 @RestController
+@RequestMapping("/api")
 public class EndpointController {
     AirCompanyService airCompanyService;
     private static final Logger LOGGER = (Logger) LoggerFactory.getLogger(EndpointController.class);
 
     @GetMapping("/create")
-    public AirCompany createAirCompany(@RequestBody AirCompany airCompany) {
+    public AirCompany createAirCompany(@Valid @RequestBody AirCompany airCompany) {
         return airCompanyService.addAirCompany(airCompany);
     }
 
@@ -27,17 +30,16 @@ public class EndpointController {
     }
 
     @GetMapping("/airCompany/{id}")
-    public AirCompany getAirCompanyById(@PathVariable(value = "id") Long id) {
-        try {
-            return airCompanyService.getAirCompanyById(id);
-        } catch (Exception e) {
-            LOGGER.info("There is no AirCompany with this id");
-            return null;
+    public Object getAirCompanyById(@PathVariable(value = "id") Long id) {
+        if (airCompanyService.getAirCompanyById(id) == null) {
+            return "There is no company with " + id + " id";
         }
+        return airCompanyService.getAirCompanyById(id);
     }
 
     @PutMapping("/airCompany/{id}")
-    public AirCompany updateAirCompany(@PathVariable(value = "id") Long id, @RequestBody AirCompany airCompanyDetails) {
+    public AirCompany updateAirCompany(@PathVariable(value = "id") Long id,
+                                       @Valid @RequestBody AirCompany airCompanyDetails) {
         AirCompany airCompany = airCompanyService.getAirCompanyById(id);
         airCompany.setCompanyType(airCompanyDetails.getType());
         airCompany.setName(airCompany.getName());
@@ -57,5 +59,10 @@ public class EndpointController {
                                           @RequestBody AirCompany airCompany) {
 
         return airCompanyService.moveAirPlaneBetweenCompanies(airplane, airCompany);
+    }
+
+    @GetMapping("/flights/{status}")
+    public List<Flight> getAllFlightsByStatus(@PathVariable(value = "status") String status) {
+      return airCompanyService.findAllAirCompanyFlights(status);
     }
 }

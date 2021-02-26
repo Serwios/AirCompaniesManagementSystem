@@ -2,6 +2,7 @@ package Sevices;
 
 import Entities.AirCompany;
 import Entities.Airplane;
+import Entities.Flight;
 
 import java.util.List;
 
@@ -12,4 +13,5 @@ public interface AirCompanyService {
     public AirCompany getAirCompanyById(Long id);
     public List<AirCompany> listAirCompanies();
     public Airplane moveAirPlaneBetweenCompanies(Airplane airplane, AirCompany airCompany);
+    public List<Flight> findAllAirCompanyFlights(String status);
 }

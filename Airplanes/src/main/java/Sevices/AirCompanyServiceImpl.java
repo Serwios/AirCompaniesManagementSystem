@@ -3,9 +3,11 @@ package Sevices;
 import Dao.AirCompanyDao;
 import Entities.AirCompany;
 import Entities.Airplane;
+import Entities.Flight;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 //TODO MAKE ENDPOINT TO LATEST METHOD
 @Service
@@ -51,5 +53,11 @@ public class AirCompanyServiceImpl implements AirCompanyService {
     public Airplane moveAirPlaneBetweenCompanies(Airplane airplane, AirCompany airCompany) {
         airplane.setAirCompanyId(airCompany.getID());
         return airplane;
+    }
+
+    @Override
+    @Transactional
+    public List<Flight> findAllAirCompanyFlights(String status) {
+        return airCompanyDao.findAllAirCompanyFlightByStatus(status);
     }
 }
