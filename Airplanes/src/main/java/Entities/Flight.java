@@ -17,7 +17,7 @@ public class Flight {
     private Double estimatedFlightTime;
     private Double endedAt;
     private Double delayStartedAt;
-    private Double createdAt;
+    private String createdAt;
     private String flightStatus;
     private String departureCountry;
     private String destinationCountry;
@@ -25,7 +25,7 @@ public class Flight {
     protected Flight(){}
 
     public Flight(Long airCompanyId, Long airplaneId, Long distance, Double estimatedFlightTime,
-                  Double endedAt, Double delayStartedAt, Double createdAt, String flightStatus, String departureCountry, String destinationCountry) {
+                  Double endedAt, Double delayStartedAt, String createdAt, String flightStatus, String departureCountry, String destinationCountry) {
         this.airCompanyId = airCompanyId;
         this.airplaneId = airplaneId;
         this.distance = distance;
@@ -90,11 +90,11 @@ public class Flight {
         this.delayStartedAt = delayStartedAt;
     }
 
-    public Double getCreatedAt() {
+    public String getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Double createdAt) {
+    public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
 

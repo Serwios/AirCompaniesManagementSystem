@@ -1,5 +1,8 @@
 package Controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import java.util.logging.Logger;
@@ -65,4 +68,36 @@ public class EndpointController {
     public List<Flight> getAllFlightsByStatus(@PathVariable(value = "status") String status) {
       return airCompanyService.findAllAirCompanyFlights(status);
     }
+
+    @GetMapping("/createAirplane")
+    public Airplane createNewAirplane(@Valid @RequestBody Airplane airplane) {
+        return airCompanyService.addNewAirplane(airplane);
+    }
+
+    @GetMapping("/createAirplane/{hourDelay}")
+    public Airplane createNewAirplaneDelay(@Valid @RequestBody Airplane airplane, @PathVariable (value = "hourDelay") String hourDelay) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy.H");
+        Date date1 = new Date();
+        String strDate = dateFormat.format(date1);
+
+        while (!strDate.equals(hourDelay)) {
+            strDate = dateFormat.format(date1);
+            if (strDate.equals(hourDelay)) {
+                return airCompanyService.addNewAirplane(airplane);
+            }
+        }
+
+        return null;
+    }
+
+    @GetMapping("/findAllActiveStatusFlights")
+    public List<Flight> findAllActiveStatusFlights() throws ParseException {
+        return airCompanyService.findAllActiveStatusFlights();
+    }
+
+    @PostMapping("/addFlight")
+    public Flight addNewFlight(@RequestBody Flight flight) {
+        return airCompanyService.addNewFlight(flight);
+    }
+
 }

@@ -1,13 +1,18 @@
 package Dao;
 
 import Entities.AirCompany;
+import Entities.Airplane;
 import Entities.Flight;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import javax.xml.crypto.Data;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -83,5 +88,63 @@ public class AirCompanyDaoImpl implements AirCompanyDao {
         }
 
         return modFlightLs;
+    }
+
+    //This method have two controllers
+    @Override
+    public Airplane addNewAirplane(Airplane airplane) {
+        Session session = this.sessionFactory.getCurrentSession();
+        session.persist(airplane);
+        LOGGER.info("Airplane successful added! Airplane details: " + airplane);
+        return airplane;
+    }
+
+    @Override
+    public List<Flight> findAllActiveStatusFlights() throws ParseException {
+        Session session = this.sessionFactory.getCurrentSession();
+        List<Flight> sndFlightLs = session.createQuery("from Flight").list();
+        List<Flight> modFlightLs = new ArrayList<>();
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+
+        Date newDate = new Date();
+        String strDate = dateFormat.format(newDate);
+        Date currentDate = dateFormat.parse(strDate);
+
+        for (Flight x : sndFlightLs) {
+            Date tmp = dateFormat.parse(x.getCreatedAt());
+
+            long milliseconds = currentDate.getTime() - tmp.getTime();
+            int hours = (int) (milliseconds / (60 * 60 * 1000));
+
+            if (x.getFlightStatus().equals("ACTIVE") && hours >= 24) {
+                modFlightLs.add(x);
+            }
+        }
+
+        return modFlightLs;
+    }
+
+    @Override
+    public Flight addNewFlight(Flight flight) {
+        Session session = this.sessionFactory.getCurrentSession();
+        session.persist(flight);
+        flight.setFlightStatus("PENDING");
+        LOGGER.info("Flight successful added! Flight details: " + flight);
+        return flight;
+    }
+
+    //TODO: FINISH LATEST EXERCISE
+    @Override
+    public Flight changeFlightStatus(String status, Flight flight) {
+        if (status.equals("DELAYED")) {
+
+        } else if (status.equals("ACTIVE")) {
+
+        } else if (status.equals("COMPLETED")) {
+
+        }
+
+        return null;
     }
 }
