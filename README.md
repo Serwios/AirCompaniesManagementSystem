@@ -4,7 +4,8 @@
   
   git clone https://github.com/Serwios/AirCompaniesManagementSystem.git
   ---
-2. Create mysql database 
+  
+2. Create mysql database
   
   create database AIR
   ---
