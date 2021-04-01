@@ -9,7 +9,6 @@ import javax.persistence.Id;
 public class AirCompany {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    // ID SHOULD BE UNUSED. AND ONLY GETTER FOR HIM
     private Long ID;
     private Long foundedAt;
     private String name;
