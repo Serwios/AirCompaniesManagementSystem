@@ -18,12 +18,12 @@ public class FlightController {
     private FlightService flightService;
 
     @GetMapping()
-    public List<Flight> getAllCompanies() {
+    public List<Flight> getAllFlights() {
         return flightService.getAll();
     }
 
     @PostMapping("/create")
-    public Flight createAirCompany(@RequestBody Flight flight) {
+    public Flight createFlight(@RequestBody Flight flight) {
         return flightService.create(flight);
     }
 
@@ -34,13 +34,13 @@ public class FlightController {
 
     @PutMapping("/update/{id}")
     public Flight updateId(@PathVariable Long id,
-                               @RequestBody Flight flight) {
+                           @RequestBody Flight flight) {
 
         return flightService.update(id, flight);
     }
 
     @GetMapping("/{id}")
-    public Flight getAirCompanyById(@PathVariable Long id) {
+    public Flight getFlightById(@PathVariable Long id) {
         return flightService.getById(id);
     }
 
@@ -58,12 +58,16 @@ public class FlightController {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
         String strDate = dateFormat.format(date);
 
-        if (status.equals("DELAYED")) {
-            flight.setDelayStartedAt(strDate);
-        } else if (status.equals("ACTIVE")) {
-            flight.setCreatedAt(strDate);
-        } else if (status.equals("COMPLETED")) {
-            flight.setEndedAt(strDate);
+        switch (status) {
+            case "DELAYED":
+                flight.setDelayStartedAt(strDate);
+                break;
+            case "ACTIVE":
+                flight.setCreatedAt(strDate);
+                break;
+            case "COMPLETED":
+                flight.setEndedAt(strDate);
+                break;
         }
 
         return flightService.save(flight);

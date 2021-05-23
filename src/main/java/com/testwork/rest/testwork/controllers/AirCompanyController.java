@@ -2,7 +2,7 @@ package com.testwork.rest.testwork.controllers;
 
 import com.testwork.rest.testwork.entities.AirCompany;
 import com.testwork.rest.testwork.services.AirCompanyService;
-import com.testwork.rest.testwork.services.AirPlaneService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,6 +1,5 @@
 package com.testwork.rest.testwork.controllers;
 
-import com.testwork.rest.testwork.entities.AirCompany;
 import com.testwork.rest.testwork.entities.Airplane;
 import com.testwork.rest.testwork.services.AirPlaneService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +40,7 @@ public class PlaneController {
     }
 
     @GetMapping("/{id}")
-    public Airplane getAirCompanyById(@PathVariable Long id) {
+    public Airplane getAirplaneById(@PathVariable Long id) {
         return airPlaneService.getById(id);
     }
 
